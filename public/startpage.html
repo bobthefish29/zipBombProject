@@ -110,8 +110,18 @@
             });
         });
 
-        newGameButton.addEventListener('click', function (e) {
-            window.location.href = `index.html?load=${e.target.dataset.load}`;
+
+        newGameButton.addEventListener('click', async function (e) {
+            await fetch("http://localhost:80/", {
+                // Adding method type
+                method: "GET",
+                // Adding body or contents to send
+                body: JSON.stringify({index: button.indexOf(button[i])}),
+                // Adding headers to the request
+                headers: {
+                    "Content-Type": "application/json; charset=UTF-8"
+                    }
+                })
         });
     </script>
 </body>
