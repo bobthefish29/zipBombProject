@@ -120,6 +120,16 @@
             });
         });
 
+
+        
+        newGameButton.addEventListener('click', async function(e) {
+
+            
+
+
+            window.location.href = `index.html?load=${e.target.dataset.load}`;
+        });
+
         function saveName() {
             const name = document.querySelector('input[type="text"]').value;
             localStorage.setItem('savedName', name);
