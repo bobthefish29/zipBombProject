@@ -41,16 +41,12 @@ function init()
 
 states[`death`] = function()
 {
-
-    //se
-//  di gni
+    window.location = `endscreen.html`
     if (player.score > player.highscore)
     {
         player.highscore = player.score
     }
-    //player.score to object
-    //window.location = `endpage.html`
-
+    div.innerHTML = `<li>${player.score}<li>`
 }
 states[`pause`] = function(){
     o.forEach(function (i){
