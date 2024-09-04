@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>End Screen</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/jump.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <style>
+        nav{
+            box-sizing: border-box;
+            padding:10px;
+        }
+        a{
+            display:inline-block;
+            background-color:#333;
+            color:#ffffff;
+            text-align:center;
+            text-decoration:none;
+            font-size:16px;
+            padding:10px;
+            border-radius:6px;
+        }
+        .content{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <nav><a href="startpage.html">HOME</a></nav>
+    <main>
+        <section class="blank"></section>
+        <section class="content">
+            <h1>GAME OVER</h1>
+            <h3>These are the High Scores of the Game</h3>
+            <div id="menu">
+                <li>10856</li>
+                <li>13486</li>
+                <li>9036</li>
+                <li>12345</li>
+                <li>9876</li>
+            </div>
+        </section>
+
+        <script>
+            //sort the high scores
+            const menu = document.querySelector('#menu');
+            const scores = menu.querySelectorAll('li');
+            const scoresArray = Array.from(scores);
+            scoresArray.sort((a, b) => b.innerText - a.innerText);
+            scoresArray.forEach(score => menu.appendChild(score));
+        </script>
+    
+</body>
+</html>
