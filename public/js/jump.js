@@ -48,8 +48,8 @@ states[`death`] = function()
     {
         player.highscore = player.score
     }
-
-    //window.location = `hs.html`
+    //player.score to object
+    //window.location = `endpage.html`
 
 }
 states[`pause`] = function(){
