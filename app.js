@@ -29,7 +29,7 @@ const readFile = (path)=>{
 
 var port = process.env.PORT || 3000
 app.listen(port, ()=>{
-    console.log("Server Running at Localhost:80")
+    console.log("Server Running at Localhost:3000")
 })
 
 //Just so you can do "LocalHost" and it takes you to the page
