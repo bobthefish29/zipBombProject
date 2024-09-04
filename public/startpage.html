@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Page</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/jump.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <style>
+        #start-options {
+            display: block; /* Ensure the div expands to fit its content */
+        }
+
+        nav{
+            box-sizing: border-box;
+            padding:10px;
+        }
+        a{
+            display:inline-block;
+            background-color:#333;
+            color:#ffffff;
+            text-align:center;
+            text-decoration:none;
+            font-size:16px;
+            padding:10px;
+            border-radius:6px;
+        }
+
+        .menu-button{
+            display: flex;
+            justify-content: center;
+        }
+
+        main{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <nav><a href="startpage.html">HOME</a></nav>
+    <main>
+        <section class="blank"></section>
+        <section class="content">
+            <h1>WELCOME TO THE START PAGE</h1>
+            <h3>Click on the button below to start the game</h3>
+            <div id="menu"></div>
+        </section>
+    </main>
+    <script>
+        const menu = document.querySelector('#menu');
+        menu.style.display = 'flex';
+        menu.style.justifyContent = 'center';
+        menu.style.alignItems = 'center';
+        menu.style.flexDirection = 'column';
+
+        // Create a load div
+        const loadDiv = document.createElement('div');
+        loadDiv.setAttribute('id', 'loadDiv');
+        loadDiv.innerHTML = 'Loading...';
+        loadDiv.style.textAlign = 'center';
+        menu.appendChild(loadDiv);
+
+        // Create start menu
+        const startMenu = document.createElement('div');
+        startMenu.setAttribute('id', 'startMenu');
+        startMenu.style.opacity = '0';
+
+        // Create a start button
+        const startButton = document.createElement('button');
+        startButton.setAttribute('id', 'startButton');
+        startButton.innerHTML = 'Start Game';
+        startButton.disabled = true; // Disable the button initially
+        menu.appendChild(startButton);
+
+        // Options for start menu
+        const startOptions = document.createElement('div');
+        startOptions.setAttribute('id', 'start-options');
+        startOptions.style.display = 'block';
+        startOptions.style.width = '105px';
+        startOptions.style.height = '130px';
+
+        // Create a new game button
+        const newGameButton = document.createElement('button');
+        newGameButton.appendChild(document.createTextNode('New Game'));
+        newGameButton.classList.add('menu-button');
+        newGameButton.style.marginTop = '10px';
+        newGameButton.style.marginLeft = '10px';
+        startOptions.appendChild(newGameButton);
+
+        var timer = setTimeout(loadStartMenu, 2000);
+        function loadStartMenu() {
+            $('#loadDiv').animate({ opacity: 0 }, 1000, function () {
+                menu.removeChild(loadDiv);
+                menu.appendChild(startMenu);
+                $('#startMenu').animate({ opacity: 1 }, 1000, function () {
+                    startButton.disabled = false; // Enable the button after startMenu is appended
+                });
+            });
+        }
+
+        startButton.addEventListener('click', function (e) {
+            $('#startMenu').animate({ opacity: 0 }, 1000, function () {
+                menu.removeChild(startMenu);
+                menu.appendChild(startOptions);
+                $('#start-options').css({ opacity: 0 }).animate({ opacity: 1 }, 1000);
+            });
+        });
+
+        newGameButton.addEventListener('click', function (e) {
+            window.location.href = `index.html?load=${e.target.dataset.load}`;
+        });
+    </script>
+</body>
+</html>
