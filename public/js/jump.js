@@ -37,10 +37,21 @@ function init()
     timer = setInterval(main, 1000/60);
 }
 
+
+
 states[`death`] = function()
 {
     window.location = `hs.html`
-   
+
+    //se
+//  di gni
+    if (player.score > player.highscore)
+    {
+        player.highscore = player.score
+    }
+    //player.score to object
+    //window.location = `endpage.html`
+
 }
 states[`pause`] = function(){
     o.forEach(function (i){
@@ -50,11 +61,13 @@ states[`pause`] = function(){
     {
         currentState =`game`
     }
-   
+
 }
 states[`game`] = function()
 {
 
+    var score = document.querySelector('.score')
+    
     if(keys[`ArrowLeft`])
     {
         player.vx += -1
@@ -69,10 +82,17 @@ states[`game`] = function()
     //gravity
     player.vy += 1;
     player.move();
-
+    //Adding the highscore
     if(player.y > c.height +player.h)
     {
         currentState = `death`
+        if(player.score > player.highscore)
+        {
+            player.highscore = player.score //Sets the variable for highscore
+            scoreBoard[1].innerHTML = "highscore: " + player.highscore //Adds highscore to scoreboard
+            console.log(player.highscore)
+        }
+        
     }
     plat.forEach((i)=>{
         i.move()
@@ -87,8 +107,10 @@ states[`game`] = function()
             player.y--;
             player.vy = -30;
             ground.x = 10000;
-            player.score += 2;
-            console.log(player.score)
+            player.score += 1; //this is the vars for the score
+            score.innerHTML = "score: " + player.score//This is adding the score
+            //console.log(player.highscore)
+
         }
     })
 
@@ -103,11 +125,13 @@ states[`game`] = function()
         player.x++;
         player.vx = 30;
     }
-   while(player.x > c.width - player.w/2)
+    while(player.x > c.width - player.w/2)
     {
         player.x--;
         player.vx = -25;
     }
+    
+
     
 
     //draw the objects (Uses the array forEach function where i is the object stored in the o Array)
