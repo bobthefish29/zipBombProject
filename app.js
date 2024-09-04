@@ -11,7 +11,7 @@ app.listen(port, ()=>{
 
 
 
-
+//Just so you can do "LocalHost" and it takes you to the page
 app.get(`/`,(req,res)=>{
     res.sendFile(`${__dirname}/public/startpage.html`)
 
