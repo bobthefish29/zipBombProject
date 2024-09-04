@@ -41,12 +41,12 @@ function init()
 
 states[`death`] = function()
 {
-    window.location = `endscreen.html`
+    //Needs to push score to list
     if (player.score > player.highscore)
     {
         player.highscore = player.score
     }
-    menu.innerHTML = `<li>${player.score}<li>`
+    window.location = `endscreen.html`
 }
 states[`pause`] = function(){
     o.forEach(function (i){
