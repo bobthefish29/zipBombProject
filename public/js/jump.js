@@ -45,13 +45,13 @@ states[`death`] = function()
 
     //se
 //  di gni
+    //Needs to push score to list
+    
     if (player.score > player.highscore)
     {
         player.highscore = player.score
     }
-    //player.score to object
-    //window.location = `endpage.html`
-
+    window.location.href = `endscreen.html?load=${player.highscore}`;
 }
 states[`pause`] = function(){
     o.forEach(function (i){
