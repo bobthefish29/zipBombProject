@@ -40,7 +40,7 @@ function init()
 states[`death`] = function()
 {
     window.location = `hs.html`
-   
+
 }
 states[`pause`] = function(){
     o.forEach(function (i){
@@ -50,7 +50,7 @@ states[`pause`] = function(){
     {
         currentState =`game`
     }
-   
+
 }
 states[`game`] = function()
 {
@@ -103,7 +103,7 @@ states[`game`] = function()
         player.x++;
         player.vx = 30;
     }
-   while(player.x > c.width - player.w/2)
+    while(player.x > c.width - player.w/2)
     {
         player.x--;
         player.vx = -25;
