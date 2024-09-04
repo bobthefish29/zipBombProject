@@ -85,6 +85,13 @@ states[`game`] = function()
     if(player.y > c.height +player.h)
     {
         currentState = `death`
+        if(player.score > player.highscore)
+        {
+            player.highscore = player.score //Sets the variable for highscore
+            scoreBoard[1].innerHTML = "highscore: " + player.highscore //Adds highscore to scoreboard
+            console.log(player.highscore)
+        }
+        
     }
     plat.forEach((i)=>{
         i.move()
@@ -100,10 +107,7 @@ states[`game`] = function()
             player.vy = -30;
             ground.x = 10000;
             player.score += 1; //this is the vars for the score
-            player.highscore += 1;
-            
             score.innerHTML = "score: " + player.score//This is adding the score
-            
             //console.log(player.highscore)
 
         }
