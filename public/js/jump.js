@@ -41,6 +41,11 @@ function init()
 
 states[`death`] = function()
 {
+    window.location = `endscreen.html` //This is the end screen
+
+    //se
+//  di gni
+    //Needs to push score to list
     
     if (player.score > player.highscore)
     {
