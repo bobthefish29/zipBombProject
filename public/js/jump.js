@@ -41,7 +41,7 @@ function init()
 
 states[`death`] = function()
 {
-    window.location = `hs.html`
+    window.location = `endscreen.html` //This is the end screen
 
     //se
 //  di gni
