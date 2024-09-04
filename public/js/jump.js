@@ -46,7 +46,7 @@ states[`death`] = function()
     {
         player.highscore = player.score
     }
-    div.innerHTML = `<li>${player.score}<li>`
+    menu.innerHTML = `<li>${player.score}<li>`
 }
 states[`pause`] = function(){
     o.forEach(function (i){
