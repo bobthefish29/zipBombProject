@@ -51,6 +51,9 @@ states[`death`] = function()
     {
         player.highscore = player.score
     }
+
+    localStorage.setItem('highscore', player.highscore)
+
     window.location.href = `endscreen.html?load=${player.highscore}`;
 }
 states[`pause`] = function(){

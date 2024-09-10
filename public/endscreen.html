@@ -37,6 +37,7 @@
         <section class="content">
             <h1>GAME OVER</h1>
             <div id="player-name"></div>
+            <div id="player-score"></div>
             <h3>These are the High Scores of the Game</h3>
             <div id="menu">
                 <li>10856</li>
@@ -49,6 +50,27 @@
         </section>
 
         <script>
+
+            const highScoreList = async () => {
+                await fetch('http://localhost:3000/highScoreList', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        name: playerName,
+                        score: playerScore
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json; charset=UTF-8'
+                    }
+                });
+            }
+            
+            const highScore = async () => {
+                const response = await fetch('http://localhost:3000/highScoreList');
+                const data = await stringify(response);
+                console.log(data);
+            }
+            highScore();
+
             //sort the high scores
             const menu = document.querySelector('#menu');
             const scores = menu.querySelectorAll('li');
@@ -62,6 +84,19 @@
             if (playerName) {
                 playerNameContainer.innerHTML = `Player: ${playerName}`;
             }
+
+            //player score
+            const playerScore = localStorage.getItem('highscore');
+            console.log(playerScore);
+            const playerScoreContainer = document.querySelector('#player-score');
+            if (playerScore) {
+                playerScoreContainer.innerHTML = `Score: ${playerScore}`;
+                highScoreList();
+            }
+
+            //
+            
+
         </script>
 </body>
 </html>
