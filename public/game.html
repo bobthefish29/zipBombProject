@@ -16,7 +16,7 @@
                     <!--<p class="anim">0</p>-->
                 </div>
                 <div>
-                    <p class="score">highscore: 0</p>
+                    <p class="score">HighScore: 0</p>
                     <!--<p class="anim">0</p>-->
                 </div>
             </div>
@@ -27,5 +27,25 @@
     <script src="js/Box.js"></script>
     <script src="js/keyboard.js"></script>
     <script src="js/jump.js"></script>
+
+    <!-- <script>
+
+        const displayHighscore = async () => {
+            var promise = await fetch('http://localhost:3000/highScoreList');
+            var data = await promise.json(data)
+            console.log(data[0].score)
+            var highestPlayerScore = document.querySelector("#playerHigh")
+            highestPlayerScore.innerHTML = `<p>HighScore:${data[0].score}</p>`
+        }                
+        
+        displayHighscore()
+
+
+
+
+
+
+    </script> -->
+
 </body>
 </html>

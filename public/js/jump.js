@@ -15,6 +15,8 @@ var plat = [
 ]
 init();
 
+
+
 //Main Game Loop
 function main()
 {
@@ -31,6 +33,16 @@ function init()
     o[2] = plat[0]
     o[3] = plat[1]
     scoreBoard = document.querySelectorAll(`#score div p`);
+
+
+
+    if(localStorage.getItem('highscore')){
+        player.highscore = localStorage.getItem('highscore')
+    }else{
+        player.highscore = 0
+    }
+
+
     currentState = `game`;
     //timer to make the game run at 60fps
     clearTimeout(timer);
@@ -47,10 +59,6 @@ states[`death`] = function()
 //  di gni
     //Needs to push score to list
     
-    if (player.score > player.highscore)
-    {
-        player.highscore = player.score
-    }
 
     localStorage.setItem('highscore', player.highscore)
 
@@ -68,7 +76,10 @@ states[`pause`] = function(){
 }
 states[`game`] = function()
 {
-
+    if(keys[`p`])
+        {
+            currentState =`pause`
+        }
     var score = document.querySelector('.score')
     
     if(keys[`ArrowLeft`])
@@ -89,12 +100,12 @@ states[`game`] = function()
     if(player.y > c.height +player.h)
     {
         currentState = `death`
-        if(player.score > player.highscore)
-        {
-            player.highscore = player.score //Sets the variable for highscore
-            scoreBoard[1].innerHTML = "highscore: " + player.highscore //Adds highscore to scoreboard
-            console.log(player.highscore)
-        }
+        // if(player.score > player.highscore)
+        // {
+        //     player.highscore = player.score //Sets the variable for highscore
+        //     scoreBoard[1].innerHTML = "highscore: " + player.highscore //Adds highscore to scoreboard
+        //     console.log(player.highscore)
+        // }
         
     }
     plat.forEach((i)=>{
@@ -112,6 +123,17 @@ states[`game`] = function()
             ground.x = 10000;
             player.score += 1; //this is the vars for the score
             score.innerHTML = "score: " + player.score//This is adding the score
+            localStorage.setItem('highscore', player.score)
+            if(player.score >= player.highscore)
+                {
+                    player.highscore = player.score //Sets the variable for highscore
+                    //scoreBoard[1].innerHTML = "highscore: " + player.highscore //Adds highscore to scoreboard
+                    console.log(player.highscore)
+                }
+            scoreBoard[1].innerHTML = "highscore: " + player.highscore //Adds highscore to scoreboard
+            
+
+
             //console.log(player.highscore)
 
         }
@@ -135,12 +157,17 @@ states[`game`] = function()
     }
     
 
-    
-
     //draw the objects (Uses the array forEach function where i is the object stored in the o Array)
     o.forEach(function (i){
         i.draw()
     })
+
+
+
+
+
+
+
 }
 
 function rand(low, high)

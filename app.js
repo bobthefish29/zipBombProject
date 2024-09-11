@@ -47,13 +47,16 @@ app.get('/game', (req, res) => {
 app.get('/highScoreList', async (req, res) => {
     var highScore = await readFile(`./data/highScore.json`)
     console.log(highScore)
-    res.send(JSON.Parse(highScore))
+    //res.send(JSON.parse(highScore))
+    res.send(highScore)
 });
 
 app.post('/highScoreList', async (req, res) => {
     var highScore = await readFile(`./data/highScore.json`)
     highScore = JSON.parse(highScore)
     highScore.push(req.body)
+    highScore = highScore.sort((a, b) => (b.score - a.score));
+    highScore = highScore.slice(0,5)
     highScore = JSON.stringify(highScore)
     await fs.writeFile('./data/highScore.json', highScore, err => {
         if (err) {
