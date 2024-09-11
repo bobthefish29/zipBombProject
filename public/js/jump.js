@@ -36,11 +36,14 @@ function init()
 
 
 
+
     if(localStorage.getItem('highscore')){
         player.highscore = localStorage.getItem('highscore')
     }else{
         player.highscore = 0
     }
+
+    scoreBoard[1].innerHTML = "highscore: " + player.highscore //Adds highscore to scoreboard
 
 
     currentState = `game`;
@@ -59,8 +62,9 @@ states[`death`] = function()
 //  di gni
     //Needs to push score to list
     
-
-    localStorage.setItem('highscore', player.highscore)
+    
+    localStorage.setItem('playerScore', player.score)
+    
 
     window.location.href = `endscreen.html?load=${player.highscore}`;
 }
