@@ -44,25 +44,27 @@ app.get('/game', (req, res) => {
     res.sendFile(`${__dirname}/public/game.html`)
 });
 
-
-
-
 app.get('/highScoreList', async (req, res) => {
-    res.sendFile(`${__dirname}/public/endscreen.html`)
+    var highScore = await readFile(`./data/highScore.json`)
+    console.log(highScore)
+    //res.send(JSON.parse(highScore))
+    res.send(highScore)
 });
 
-
-app.post('/highScoreList', async (req, res) => { 
-    var oldData =  await readFile(`./data/highScore`)
-    var newData =  await JSON.parse(oldData)
-    newData.push(req.body)
-    const jsonString = JSON.stringify(newData);
-    await fs.writeFile('./data/highScore', jsonString, err => {
+app.post('/highScoreList', async (req, res) => {
+    var highScore = await readFile(`./data/highScore.json`)
+    highScore = JSON.parse(highScore)
+    highScore.push(req.body)
+    highScore = highScore.sort((a, b) => (b.score - a.score));
+    highScore = highScore.slice(0,5)
+    highScore = JSON.stringify(highScore)
+    await fs.writeFile('./data/highScore.json', highScore, err => {
         if (err) {
             console.log('Error writing file', err)
-    } else {
+    }else {
             console.log('Successfully wrote file')
     }
     });
-    res.send(jsonString);
+    res.send(highScore);
 });
+
